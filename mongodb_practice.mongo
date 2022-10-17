@@ -1,0 +1,679 @@
+/**********************Company Employee Database: ************************/
+
+1. Create a database with name ‘Company’.  
+use('Company')
+
+2. An ‘Employee’ is a collection of documents with the following fields:  
+db.createCollection('Employee');
+
+3. A ‘Transaction’ is a collection of documents with the following fields: 
+db.createCollection('Transaction');
+
+QUERIES
+
+1.  Insert at least 5 documents in ‘Employee’ collection.
+
+db.Employee.insertMany([
+    {'_id': 101, 'first_name': 'Abhishek', 'last_name': 'Bacchan'   , 'email': 'abhishek@mail.com' , 'phone': 9012345677, 'address': {'house_no': 20, 'street': 'Juhu Road', 'city': 'Mumbai', 'state': 'Maharashtra', 'country': 'India','pin_code': 400049}        , 'salary': 45000,  'designation': 'supervisor',        'experience': 3,  'joining_date':  '2014-03-01', 'birth_date':  '1983-02-02'}, 
+    {'_id': 102, 'first_name': 'Nikita'  , 'last_name': 'Khrushchev', 'email': 'nikitak@mail.com'  , 'phone': 9012345677, 'address': {'house_no': 77, 'street': 'Tverskaya St.', 'city': 'Moscow', 'state': 'Moscow Oblast', 'country': 'Russia','pin_code': 352660} , 'salary': 55000,  'designation': 'supervisor',        'experience': 5,  'joining_date':  '2012-07-05', 'birth_date':  '1994-15-04'}, 
+    {'_id': 103, 'first_name': 'Kim'     , 'last_name': 'Un'        , 'email': 'kimun@mail.com'    , 'phone': 8291919746, 'address': {'house_no': 55, 'street': 'Kim Il-sung Square', 'city': '	Pyongyang', 'state': 'Pyongan', 'country': 'DPRK','pin_code': 497335}, 'salary': 85000,  'designation': 'manager',           'experience': 10, 'joining_date':  '2012-11-04', 'birth_date':  '1984-08-01'}, 
+    {'_id': 104, 'first_name': 'Tony'    , 'last_name': 'Stark'     , 'email': 'ironman@mail.com'  , 'phone': 2129704133, 'address': {'house_no': 10880, 'street': 'Malibu Point', 'city': 'Malibu', 'state': 'California', 'country': 'USA','pin_code': 90265}      , 'salary': 100000, 'designation': 'CEO',               'experience': 27, 'joining_date':  '1980-14-04', 'birth_date':  '1970-05-29'},
+    {'_id': 105, 'first_name': 'Peter'   , 'last_name': 'Parker'    , 'email': 'spiderman@mail.com', 'phone': 4072241783, 'address': {'house_no': 20, 'street': 'Ingram St.', 'city': 'Queens', 'state': 'New York', 'country': 'USA','pin_code': 11005}             , 'salary': 28000,  'designation': 'floor supervisor', 'experience': 17, 'joining_date':  '2007-11-12', 'birth_date':  '1992-07-07'},
+]);
+
+
+2.Insert multiple documents (at least 10) into the ‘Transaction’ collection by passing 
+    an array of documents to the db.collection.insert () method. 
+
+db.Transaction.insertMany([
+    {'_id': 201, 'date': '2022-26-01', 'name': 'Abhishek', 'details': {'item_id': 10, 'item_name': 'Asus Laptop',   'quantity': 1, 'price': 86000}, 'payment': {'type': 'debit', 'amount_paid': 95000, 'payment_success': true }, 'remark': ''},
+    {'_id': 202, 'date': '2022-26-01', 'name': 'Nikita'  , 'details': {'item_id': 10, 'item_name': 'Asus Laptop',   'quantity': 1, 'price': 86000}, 'payment': {'type': 'credit', 'amount_paid': 95000, 'payment_success': true}, 'remark': 'Transaction Successful'},
+    {'_id': 203, 'date': '2022-26-01', 'name': 'Nikita'  , 'details': {'item_id': 11, 'item_name': 'Keyboard',      'quantity': 1, 'price': 980  }, 'payment': {'type': 'debit', 'amount_paid': 1000, 'payment_success': true  }, 'remark': 'Transaction Successful'},
+    {'_id': 204, 'date': '2022-26-01', 'name': 'Kim'     , 'details': {'item_id': 12, 'item_name': 'Lenovo Laptop', 'quantity': 1, 'price': 75000}, 'payment': {'type': 'debit', 'amount_paid': 80000, 'payment_success': false}, 'remark': 'Transaction failed'},
+    {'_id': 205, 'date': '2022-26-01', 'name': 'Tony'    , 'details': {'item_id': 12, 'item_name': 'Lenovo Laptop', 'quantity': 1, 'price': 75000}, 'payment': {'type': 'credit', 'amount_paid': 80000, 'payment_success': true}, 'remark': ''},
+    {'_id': 206, 'date': '2022-26-01', 'name': 'Peter'   , 'details': {'item_id': 13, 'item_name': 'iPhone 12',     'quantity': 2, 'price': 62000}, 'payment': {'type': 'credit', 'amount_paid': 65000, 'payment_success': true}, 'remark': ''},
+    {'_id': 207, 'date': '2022-26-01', 'name': 'Abhishek', 'details': {'item_id': 14, 'item_name': 'Wireless Mouse','quantity': 2, 'price': 700  }, 'payment': {'type': 'cash', 'amount_paid': 450, 'payment_success': true    }, 'remark': ''},
+    {'_id': 208, 'date': '2022-26-01', 'name': 'Peter'   , 'details': {'item_id': 13, 'item_name': 'iPhone 12',     'quantity': 1, 'price': 62000}, 'payment': {'type': 'cash', 'amount_paid': 65000, 'payment_success': true  }, 'remark': 'Transaction Successful'},
+    {'_id': 209, 'date': '2022-26-01', 'name': 'Tony'    , 'details': {'item_id': 11, 'item_name': 'Keyboard',      'quantity': 1, 'price': 980  }, 'payment': {'type': 'debit', 'amount_paid': 1100, 'payment_success': false }, 'remark': 'Transaction cancelled'},
+    {'_id': 210, 'date': '2022-26-01', 'name': 'Kim'     , 'details': {'item_id': 10, 'item_name': 'Asus Laptop',   'quantity': 1, 'price': 86000}, 'payment': {'type': 'debit', 'amount_paid': 95000, 'payment_success': true }, 'remark': 'Transaction Successful'},
+    {'_id': 211, 'date': '2022-28-01', 'name': 'Kim'     , 'details': {'item_id': 15, 'item_name': 'Mousepad',   'quantity': 1, 'price': 380}, 'payment': {'type': 'cash', 'amount_paid': 400, 'payment_success': true }}
+])
+
+
+3.Display all the documents of both the collections in a formatted manner. 
+
+db.Employee.find().pretty()
+
+[
+  {
+    _id: 101,
+    first_name: 'Abhishek',
+    last_name: 'Bacchan',
+    email: 'abhishek@mail.com',
+    phone: 9012345677,
+    address: {
+      house_no: 20,
+      street: 'Juhu Road',
+      city: 'Mumbai',
+      state: 'Maharashtra',
+      country: 'India',
+      pin_code: 400049
+    },
+    salary: 45000,
+    designation: 'supervisor',
+    experience: 3,
+    joining_date: '2014-03-01',
+    birth_date: '1983-02-02'
+  },
+  {
+    _id: 102,
+    first_name: 'Nikita',
+    last_name: 'Khrushchev',
+    email: 'nikitak@mail.com',
+    phone: 9012345677,
+    address: {
+      house_no: 77,
+      street: 'Tverskaya St.',
+      city: 'Moscow',
+      state: 'Moscow Oblast',
+      country: 'Russia',
+      pin_code: 352660
+    },
+    salary: 55000,
+    designation: 'supervisor',
+    experience: 5,
+    joining_date: '2012-07-05',
+    birth_date: '1994-15-04'
+  },
+  {
+    _id: 103,
+    first_name: 'Kim',
+    last_name: 'Un',
+    email: 'kimun@mail.com',
+    phone: 8291919746,
+    address: {
+      house_no: 55,
+      street: 'Kim Il-sung Square',
+      city: '\tPyongyang',
+      state: 'Pyongan',
+      country: 'DPRK',
+      pin_code: 497335
+    },
+    salary: 85000,
+    designation: 'manager',
+    experience: 10,
+    joining_date: '2012-11-04',
+    birth_date: '1984-08-01'
+  },
+  {
+    _id: 104,
+    first_name: 'Tony',
+    last_name: 'Stark',
+    email: 'ironman@mail.com',
+    phone: 2129704133,
+    address: {
+      house_no: 10880,
+      street: 'Malibu Point',
+      city: 'Malibu',
+      state: 'California',
+      country: 'USA',
+      pin_code: 90265
+    },
+    salary: 100000,
+    designation: 'CEO',
+    experience: 27,
+    joining_date: '1980-14-04',
+    birth_date: '1970-05-29'
+  },
+  {
+    _id: 105,
+    first_name: 'Peter',
+    last_name: 'Parker',
+    email: 'spiderman@mail.com',
+    phone: 4072241783,
+    address: {
+      house_no: 20,
+      street: 'Ingram St.',
+      city: 'Queens',
+      state: 'New York',
+      country: 'USA',
+      pin_code: 11005
+    },
+    salary: 28000,
+    designation: 'floor supervisor',
+    experience: 17,
+    joining_date: '2007-11-12',
+    birth_date: '1992-07-07'
+  }
+]
+
+
+db.Transaction.find().pretty()
+
+[
+  {
+    _id: 201,
+    date: '2022-26-01',
+    name: 'Abhishek',
+    details: {
+      item_id: 10,
+      item_name: 'Asus Laptop',
+      quantity: 1,
+      price: 86000
+    },
+    payment: { type: 'debit', amount_paid: 95000, payment_success: true },
+    remark: ''
+  },
+  {
+    _id: 202,
+    date: '2022-26-01',
+    name: 'Nikita',
+    details: {
+      item_id: 10,
+      item_name: 'Asus Laptop',
+      quantity: 1,
+      price: 86000
+    },
+    payment: { type: 'credit', amount_paid: 95000, payment_success: true },
+    remark: 'Transaction Successful'
+  },
+  {
+    _id: 203,
+    date: '2022-26-01',
+    name: 'Nikita',
+    details: { item_id: 11, item_name: 'Keyboard', quantity: 1, price: 980 },
+    payment: { type: 'debit', amount_paid: 1000, payment_success: true },
+    remark: 'Transaction Successful'
+  },
+  {
+    _id: 204,
+    date: '2022-26-01',
+    name: 'Kim',
+    details: {
+      item_id: 12,
+      item_name: 'Lenovo Laptop',
+      quantity: 1,
+      price: 75000
+    },
+    payment: { type: 'debit', amount_paid: 80000, payment_success: false },
+    remark: 'Transaction failed'
+  },
+  {
+    _id: 205,
+    date: '2022-26-01',
+    name: 'Tony',
+    details: {
+      item_id: 12,
+      item_name: 'Lenovo Laptop',
+      quantity: 1,
+      price: 75000
+    },
+    payment: { type: 'credit', amount_paid: 80000, payment_success: true },
+    remark: ''
+  },
+  {
+    _id: 206,
+    date: '2022-26-01',
+    name: 'Peter',
+    details: { item_id: 13, item_name: 'iPhone 12', quantity: 2, price: 62000 },
+    payment: { type: 'credit', amount_paid: 65000, payment_success: true },
+    remark: ''
+  },
+  {
+    _id: 207,
+    date: '2022-26-01',
+    name: 'Abhishek',
+    details: {
+      item_id: 14,
+      item_name: 'Wireless Mouse',
+      quantity: 2,
+      price: 700
+    },
+    payment: { type: 'cash', amount_paid: 450, payment_success: true },
+    remark: ''
+  },
+  {
+    _id: 208,
+    date: '2022-26-01',
+    name: 'Peter',
+    details: { item_id: 13, item_name: 'iPhone 12', quantity: 1, price: 62000 },
+    payment: { type: 'cash', amount_paid: 65000, payment_success: true },
+    remark: 'Transaction Successful'
+  },
+  {
+    _id: 209,
+    date: '2022-26-01',
+    name: 'Tony',
+    details: { item_id: 11, item_name: 'Keyboard', quantity: 1, price: 980 },
+    payment: { type: 'debit', amount_paid: 1100, payment_success: false },
+    remark: 'Transaction cancelled'
+  },
+  {
+    _id: 210,
+    date: '2022-26-01',
+    name: 'Kim',
+    details: {
+      item_id: 10,
+      item_name: 'Asus Laptop',
+      quantity: 1,
+      price: 86000
+    },
+    payment: { type: 'debit', amount_paid: 95000, payment_success: true },
+    remark: 'Transaction Successful'
+  },
+  {
+    _id: 211,
+    date: '2022-28-01',
+    name: 'Kim',
+    details: { item_id: 15, item_name: 'Mousepad', quantity: 1, price: 380 },
+    payment: { type: 'cash', amount_paid: 400, payment_success: true }
+  }
+]
+
+
+
+4.Update salary of all employees by giving an increment of Rs. 40000. 
+
+db.Employee.updateMany({}, {$inc: {'salary': 40000}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 5,
+  modifiedCount: 5,
+  upsertedCount: 0
+}
+
+
+5. Update the remark for transaction id 201.
+
+db.Transaction.updateOne({'_id': 201}, {$set: {'remark': 'Transaction Successful'}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+db.Transaction.findOne({'_id':201})
+{
+  _id: 201,
+  date: '2022-26-01',
+  name: 'Abhishek',
+  details: { item_id: 10, item_name: 'Asus Laptop', quantity: 1, price: 86000 },
+  payment: { type: 'debit', amount_paid: 95000, payment_success: true },
+  remark: 'Transaction Successful'
+}
+
+
+6.Update designation of an employee named “Nikita” from supervisor to manager. 
+
+db.Employee.updateOne({'first_name':'Nikita'}, {$set: {'designation': 'manager'}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+7.  Update designation of an employee having Employee Id as 101. 
+
+db.Employee.updateOne({'_id': 101}, {$set: {'designation': 'senior supervisor'}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+8.Change the address of an employee having Employee Id as 101.
+
+db.Employee.updateOne(
+    {'_id': 101},
+    {$set: 
+        {'address': 
+            {'house_no': 3, 
+            'street': 'Sinhagad Road', 
+            'city': 'Pune', 'state': 'Maharashtra', 'country': 'India','pin_code': 411041
+            }
+        }}
+)
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+9.Delete transaction made by “Abhishek” employee on the given date" ". 
+
+db.Transaction.deleteOne({'name': 'Abhishek', 'date': '2022-26-01'})
+
+{ acknowledged: true, deletedCount: 1 }
+
+
+10. Delete all the employees whose first name starts with ‘K’. 
+
+db.Employee.deleteOne({'first_name': {$regex: /^K/}})
+
+{ acknowledged: true, deletedCount: 1 }
+
+
+(MongoDB Aggregate framework based queries) 
+
+1. Find employees having designation as either ‘manager’ or ‘floor supervisor’. 
+
+db.Employee.aggregate([
+    {'$match': 
+        {'$or': [{'designation': 'floor supervisor'} ,{'designation':'manager'}]}}
+])
+
+db.Employee.find({$or: [{'designation': 'manager'} , {'designation': 'floor supervisor'}]});
+
+//output
+[
+  {
+    _id: 102,
+    first_name: 'Nikita',
+    last_name: 'Khrushchev',
+    email: 'nikitak@mail.com',
+    phone: 9012345677,
+    address: {
+      house_no: 77,
+      street: 'Tverskaya St.',
+      city: 'Moscow',
+      state: 'Moscow Oblast',
+      country: 'Russia',
+      pin_code: 352660
+    },
+    salary: 95000,
+    designation: 'manager',
+    experience: 5,
+    joining_date: '2012-07-05',
+    birth_date: '1994-15-04'
+  },
+  {
+    _id: 105,
+    first_name: 'Peter',
+    last_name: 'Parker',
+    email: 'spiderman@mail.com',
+    phone: 4072241783,
+    address: {
+      house_no: 20,
+      street: 'Ingram St.',
+      city: 'Queens',
+      state: 'New York',
+      country: 'USA',
+      pin_code: 11005
+    },
+    salary: 68000,
+    designation: 'floor supervisor',
+    experience: 17,
+    joining_date: '2007-11-12',
+    birth_date: '1992-07-07'
+  }
+]
+
+
+2. Find an employee whose name ends with "a" and print the output in json format. 
+
+db.Employee.find({'first_name': /a$/})
+
+//output
+[
+  {
+    _id: 102,
+    first_name: 'Nikita',
+    last_name: 'Khrushchev',
+    email: 'nikitak@mail.com',
+    phone: 9012345677,
+    address: {
+      house_no: 77,
+      street: 'Tverskaya St.',
+      city: 'Moscow',
+      state: 'Moscow Oblast',
+      country: 'Russia',
+      pin_code: 352660
+    },
+    salary: 95000,
+    designation: 'manager',
+    experience: 5,
+    joining_date: '2012-07-05',
+    birth_date: '1994-15-04'
+  }
+]
+
+
+3. Display the name of an employee whose salary is greater than 50000 using a MongoDB cursor.  
+
+db.Employee.find().forEach(
+    function(emp){
+        if (emp.salary > 90000) print(emp.first_name + " " + emp.last_name)}
+)
+
+//output
+Nikita Khrushchev
+Tony Stark
+
+
+4. Sort the employees in the descending order of their designation.  
+
+db.Employee.find().sort({'designation': -1})
+//output
+[
+  {
+    _id: 101,
+    first_name: 'Abhishek',
+    last_name: 'Bacchan',
+    email: 'abhishek@mail.com',
+    phone: 9012345677,
+    address: {
+      house_no: 3,
+      street: 'Sinhagad Road',
+      city: 'Pune',
+      state: 'Maharashtra',
+      country: 'India',
+      pin_code: 411041
+    },
+    salary: 85000,
+    designation: 'senior supervisor',
+    experience: 3,
+    joining_date: '2014-03-01',
+    birth_date: '1983-02-02'
+  },
+  {
+    _id: 102,
+    first_name: 'Nikita',
+    last_name: 'Khrushchev',
+    email: 'nikitak@mail.com',
+    phone: 9012345677,
+    address: {
+      house_no: 77,
+      street: 'Tverskaya St.',
+      city: 'Moscow',
+      state: 'Moscow Oblast',
+      country: 'Russia',
+      pin_code: 352660
+    },
+    salary: 95000,
+    designation: 'manager',
+    experience: 5,
+    joining_date: '2012-07-05',
+    birth_date: '1994-15-04'
+  },
+  {
+    _id: 105,
+    first_name: 'Peter',
+    last_name: 'Parker',
+    email: 'spiderman@mail.com',
+    phone: 4072241783,
+    address: {
+      house_no: 20,
+      street: 'Ingram St.',
+      city: 'Queens',
+      state: 'New York',
+      country: 'USA',
+      pin_code: 11005
+    },
+    salary: 68000,
+    designation: 'floor supervisor',
+    experience: 17,
+    joining_date: '2007-11-12',
+    birth_date: '1992-07-07'
+  },
+  {
+    _id: 104,
+    first_name: 'Tony',
+    last_name: 'Stark',
+    email: 'ironman@mail.com',
+    phone: 2129704133,
+    address: {
+      house_no: 10880,
+      street: 'Malibu Point',
+      city: 'Malibu',
+      state: 'California',
+      country: 'USA',
+      pin_code: 90265
+    },
+    salary: 140000,
+    designation: 'CEO',
+    experience: 27,
+    joining_date: '1980-14-04',
+    birth_date: '1970-05-29'
+  }
+]
+
+
+5. Count the total number of employees in a collection.  
+
+db.Employee.count()
+//output
+4
+
+6. Calculate the sum of total amount paid for all the transaction documents.  
+
+db.Transaction.aggregate([
+    {$group: 
+        {   '_id': '', 
+            'amount': {$sum: '$payment.amount_paid'}
+        }
+    }, 
+    {$project: 
+        {_id: 0, 'totalAmount': '$amount'}
+    }
+])
+
+//output
+[ { totalAmount: 482950 } ]
+
+
+//7. Calculate the sum of total amount paid for each payment type.  
+db.Transaction.aggregate([
+    {$group: 
+        {   '_id': '$payment.type', 
+            'amount': {$sum: '$payment.amount_paid'}
+        }
+    }
+])
+
+//output
+[
+  { _id: 'cash', amount: 65850 },
+  { _id: 'debit', amount: 177100 },
+  { _id: 'credit', amount: 240000 }
+]
+
+
+//8. Find the transaction id of the latest transaction. 
+db.Transaction.aggregate([
+    {$sort: {'date': -1}},
+    {$project: {'_id': 1}},
+    {$limit: 1}
+])
+
+//output
+[ { _id: 211 } ]
+
+
+//9. Find designation of employees who have made transaction of amount greater than Rs. 500. 
+db.Transaction.aggregate([
+   
+    {$lookup: {
+      from: 'Employee',
+      localField: 'name',
+      foreignField: 'first_name',
+      as: 'emp'
+    }},
+    {$match: {'payment.amount_paid': {$gt: 500}}},
+    {$project: {
+            '_id': 0,
+            'emp.designation': 1,
+            'payment':1
+        }
+    }
+])
+
+//output
+[
+  {
+    payment: { type: 'credit', amount_paid: 95000, payment_success: true },
+    emp: [ { designation: 'manager' } ]
+  },
+  {
+    payment: { type: 'debit', amount_paid: 1000, payment_success: true },
+    emp: [ { designation: 'manager' } ]
+  },
+  {
+    payment: { type: 'debit', amount_paid: 80000, payment_success: false },
+    emp: []
+  },
+  {
+    payment: { type: 'credit', amount_paid: 80000, payment_success: true },
+    emp: [ { designation: 'CEO' } ]
+  },
+  {
+    payment: { type: 'credit', amount_paid: 65000, payment_success: true },
+    emp: [ { designation: 'floor supervisor' } ]
+  },
+  {
+    payment: { type: 'cash', amount_paid: 65000, payment_success: true },
+    emp: [ { designation: 'floor supervisor' } ]
+  },
+  {
+    payment: { type: 'debit', amount_paid: 1100, payment_success: false },
+    emp: [ { designation: 'CEO' } ]
+  },
+  {
+    payment: { type: 'debit', amount_paid: 95000, payment_success: true },
+    emp: []
+  }
+]
+
+
+//10. Find the total quantity of a particular item sold using Map Reduce. 
+var map=function(){ emit(this.details.item_name,this.details.quantity)};
+var reduce=function(item_name, quantity){ return Array.sum(quantity);};
+db.Transaction.mapReduce(map,reduce,{out :"totalQuantitiySold"});
+db.totalQuantitiySold.find()
+
+//output
+[
+  { _id: 'Keyboard', value: 2 },
+  { _id: 'Lenovo Laptop', value: 2 },
+  { _id: 'Wireless Mouse', value: 2 },
+  { _id: 'Mousepad', value: 1 },
+  { _id: 'Asus Laptop', value: 2 },
+  { _id: 'iPhone 12', value: 3 }
+]
